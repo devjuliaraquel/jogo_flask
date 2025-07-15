@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Jogo de Perguntas e Respostas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Quicksand', Arial, sans-serif;
+            background: url('FUNDOVERDE.JPG') center/cover no-repeat fixed;
+            min-height: 100vh;
+            background-color: #d0f5e8;
+        }
+        header {
+            background: #a8e6cfcc;
+            padding: 24px 0 16px 0;
+            text-align: center;
+            border-bottom: 3px dashed #b2dfdb;
+            box-shadow: 0 2px 8px #b2dfdb55;
+            position: relative;
+        }
+        header h1 {
+            color: #379683;
+            font-size: 2.5rem;
+            margin: 0;
+            letter-spacing: 2px;
+            text-shadow: 1px 2px 0 #e0f7fa;
+        }
+        .cute-detail {
+            position: absolute;
+            top: 10px;
+            left: 30px;
+            font-size: 2rem;
+            color: #b2dfdb;
+            user-select: none;
+        }
+        .container {
+            background: #e0f7faee;
+            max-width: 420px;
+            margin: 40px auto;
+            border-radius: 24px;
+            box-shadow: 0 4px 24px #b2dfdb88;
+            padding: 32px 24px 24px 24px;
+            text-align: center;
+            position: relative;
+        }
+        .question {
+            color: #379683;
+            font-size: 1.3rem;
+            margin-bottom: 24px;
+            font-weight: bold;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            margin-bottom: 24px;
+        }
+        .option-btn {
+            background: #b2dfdb;
+            border: none;
+            border-radius: 16px;
+            padding: 12px;
+            font-size: 1rem;
+            color: #379683;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            box-shadow: 0 2px 8px #b2dfdb44;
+        }
+        .option-btn:hover {
+            background: #a8e6cf;
+            transform: scale(1.04);
+        }
+        .feedback {
+            font-size: 1.1rem;
+            margin-bottom: 16px;
+            min-height: 24px;
+            color: #388e3c;
+            font-weight: bold;
+        }
+        .score {
+            background: #b2dfdb;
+            color: #379683;
+            border-radius: 12px;
+            padding: 8px 16px;
+            font-size: 1.1rem;
+            position: absolute;
+            top: -22px;
+            right: 24px;
+            box-shadow: 0 2px 8px #b2dfdb44;
+        }
+        .cute-footer {
+            margin-top: 32px;
+            font-size: 1.5rem;
+            color: #b2dfdb;
+            user-select: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <span class="cute-detail">🌱</span>
+        <h1>Quiz Dinâmico</h1>
+    </header>
+    <div class="container">
+        <div class="score" id="score">Pontuação: 0</div>
+        <div class="question" id="question"></div>
+        <div class="options" id="options"></div>
+        <div class="feedback" id="feedback"></div>
+        <button id="nextBtn" style="display:none; margin-top:12px; background:#a8e6cf; color:#379683; border:none; border-radius:12px; padding:10px 20px; font-size:1rem; cursor:pointer;">Próxima</button>
+        <div class="cute-footer">🍃✨</div>
+    </div>
+    <script>
+        const questions = [
+            {
+                question: "Qual destas é uma linguagem de programação?",
+                options: ["HTML", "CSS", "JavaScript", "Photoshop"],
+                answer: 2
+            },
+            {
+                question: "O que significa 'true' em lógica booleana?",
+                options: ["Falso", "Verdadeiro"],
+                answer: 1
+            },
+            {
+                question: "Qual é o resultado de 2 + 2 * 2?",
+                options: ["6", "8", "4", "10"],
+                answer: 0
+            },
+            {
+                question: "O que é um array?",
+                options: [
+                    "Um tipo de dado que armazena vários valores",
+                    "Um comando de repetição",
+                    "Uma função matemática",
+                    "Um erro de sintaxe"
+                ],
+                answer: 0
+            },
+            {
+                question: "Em JavaScript, qual palavra-chave declara uma variável?",
+                options: ["var", "let", "const", "Todas as anteriores"],
+                answer: 3
+            }
+        ];
+
+
+        let current = 0;
+        let score = 0;
+        let answered = false;
+
+
+        function showQuestion() {
+            document.getElementById('feedback').textContent = '';
+            document.getElementById('nextBtn').style.display = 'none';
+            answered = false;
+            const q = questions[current];
+            document.getElementById('question').textContent = q.question;
+            const optionsDiv = document.getElementById('options');
+            optionsDiv.innerHTML = '';
+            q.options.forEach((opt, idx) => {
+                const btn = document.createElement('button');
+                btn.className = 'option-btn';
+                btn.textContent = opt;
+                btn.onclick = () => selectOption(idx);
+                optionsDiv.appendChild(btn);
+            });
+        }
+
+
+        function selectOption(idx) {
+            if (answered) return;
+            answered = true;
+            const q = questions[current];
+            const feedback = document.getElementById('feedback');
+            if (idx === q.answer) {
+                feedback.textContent = "Correto! 🎉";
+                feedback.style.color = "#388e3c";
+                score++;
+            } else {
+                feedback.textContent = "Ops! Resposta incorreta.";
+                feedback.style.color = "#e57373";
+            }
+            document.getElementById('score').textContent = `Pontuação: ${score}`;
+            document.getElementById('nextBtn').style.display = 'inline-block';
+            // Desabilita botões
+            Array.from(document.getElementsByClassName('option-btn')).forEach(btn => btn.disabled = true);
+        }
+
+
+        document.getElementById('nextBtn').onclick = () => {
+            current++;
+            if (current < questions.length) {
+                showQuestion();
+            } else {
+                document.getElementById('question').textContent = "Fim do Quiz! 🌿";
+                document.getElementById('options').innerHTML = '';
+                document.getElementById('feedback').textContent = `Sua pontuação final foi: ${score} de ${questions.length}`;
+                document.getElementById('nextBtn').style.display = 'none';
+            }
+        };
+
+
+       
+        showQuestion();
+    </script>
+</body>
+</html>
+
