@@ -9,7 +9,7 @@ def index():
 
 @app.route("/hanoi", methods=["GET", "POST"])
 def hanoi():
-    return render_template("hanoi.html")
+    return render_template("torre_hanoi.html")
 
 @app.route("/adivinha", methods=["GET", "POST"])
 def adivinha():
@@ -23,9 +23,9 @@ def adivinha():
             mensagem = "Palpite alto demais."
         else:
             mensagem = "Palpite baixo demais."
-        return render_template("adivinha.html", mensagem=mensagem, numero_aleatorio=numero)
+        return render_template("adivinhar_numero.html", mensagem=mensagem, numero_aleatorio=numero)
     numero_aleatorio = random.randint(1, 100)
-    return render_template("adivinha.html", numero_aleatorio=numero_aleatorio, mensagem=mensagem)
+    return render_template("adivinhar_numero.html", numero_aleatorio=numero_aleatorio, mensagem=mensagem)
 
 @app.route("/ppt", methods=["GET", "POST"])
 def PedraPapelTesoura():
@@ -43,7 +43,7 @@ def PedraPapelTesoura():
         else:
             resultado = "Você perdeu!"
         return render_template("pedra_papel_tesoura.html", resultado=resultado, computador=escolha_computador)
-    return render_template("ppt.html", resultado=resultado)
+    return render_template("pedra_papel_tesoura.html", resultado=resultado)
 
 @app.route("/batalha", methods=["GET", "POST"])
 def batalha():
@@ -51,11 +51,11 @@ def batalha():
 
 @app.route("/forca", methods=["GET", "POST"])
 def forca():
-    return render_template("forca.html")
+    return render_template("jogo_forca.html")
 
 @app.route("/quiz", methods=["GET", "POST"])
 def quiz():
-    return render_template("quiz.html")
+    return render_template("perguntas_respostas.html")
 
 if __name__ == "__main__":
     app.run(debug=True)
