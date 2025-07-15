@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Jogos</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background: #f0f0f0;
+      margin: 0;
+      padding: 30px;
+    }
+
+    h1 {
+      margin-bottom: 30px;
+    }
+
+    .carrossel {
+      max-width: 500px;
+      margin: auto;
+      overflow: hidden;
+      border-radius: 12px;
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.5s;
+    }
+
+    .slide {
+      min-width: 100%;
+      position: relative;
+    }
+
+    .slide img {
+      width: 100%;
+      border-radius: 12px;
+    }
+
+    .slide a {
+      position: absolute;
+      bottom: 15px;
+      left: 15px;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+    }
+
+    button {
+      margin: 20px 10px;
+      padding: 10px 20px;
+      font-size: 1em;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Escolha um Jogo</h1>
+
+  <div class="carrossel">
+    <div class="slides" id="slides">
+      <div class="slide">
+        <img src="/static/thumb_hanoi.jpg" alt="Hanoi">
+        <a href="/hanoi">Torre de Hanoi</a>
+      </div>
+      <div class="slide">
+        <img src="/static/thumb_adivinha.jpg" alt="Adivinha">
+        <a href="/adivinha">Adivinhação</a>
+      </div>
+      <div class="slide">
+        <img src="/static/thumb_ppt.jpg" alt="PPT">
+        <a href="/ppt">Pedra Papel Tesoura</a>
+      </div>
+      <div class="slide">
+        <img src="/static/thumb_batalha.jpg" alt="Batalha">
+        <a href="/batalha">Batalha Naval</a>
+      </div>
+      <div class="slide">
+        <img src="/static/thumb_forca.jpg" alt="Forca">
+        <a href="/forca">Jogo da Forca</a>
+      </div>
+      <div class="slide">
+        <img src="/static/thumb_quiz.jpg" alt="Quiz">
+        <a href="/quiz">Quiz</a>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <button onclick="mudarSlide(-1)">⬅</button>
+    <button onclick="mudarSlide(1)">➡</button>
+  </div>
+
+  <script>
+    let atual = 0;
+    const slides = document.getElementById('slides');
+    const total = document.querySelectorAll('.slide').length;
+
+    function mudarSlide(direcao) {
+      atual = (atual + direcao + total) % total;
+      slides.style.transform = `translateX(-${atual * 100}%)`;
+    }
+  </script>
+
+</body>
+</html>
