@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Pedra, Papel ou Tesoura</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center; margin-top: 50px;
+            background-image: url('fundonovoamarelo.jpg');
+            padding-top: 0;
+        }
+        header {
+            width: 100%;
+            background-color: #fbbf24;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+            color: #ffffff;
+            text-shadow: 1px 1px 2px #f59e0b;
+        }
+        div {
+            margin-top: 60px;
+        }
+        button { font-size: 18px; margin: 10px; padding: 10px 20px; }
+        #resultado { font-size: 22px; margin-top: 20px; }
+        #placar { margin-top: 30px; font-size: 18px; }
+       
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Pedra, Papel ou Tesoura</h1>
+    </header>
+    <div>
+        <button onclick="jogar('Pedra')">Pedra</button>
+        <button onclick="jogar('Papel')">Papel</button>
+        <button onclick="jogar('Tesoura')">Tesoura</button>
+    </div>
+    <div id="resultado"></div>
+    <div id="placar">
+        Usuário: <span id="usuario">0</span> |
+        Computador: <span id="computador">0</span> |
+        Empates: <span id="empates">0</span>
+    </div>
+    <script>
+        let placarUsuario = 0;
+        let placarComputador = 0;
+        let placarEmpates = 0;
+
+
+        function jogar(escolhaUsuario) {
+            const opcoes = ['Pedra', 'Papel', 'Tesoura'];
+            const escolhaComputador = opcoes[Math.floor(Math.random() * 3)];
+            let resultado = '';
+
+
+            if (escolhaUsuario === escolhaComputador) {
+                resultado = 'Empate!';
+                placarEmpates++;
+            } else if (
+                (escolhaUsuario === 'Pedra' && escolhaComputador === 'Tesoura') ||
+                (escolhaUsuario === 'Papel' && escolhaComputador === 'Pedra') ||
+                (escolhaUsuario === 'Tesoura' && escolhaComputador === 'Papel')
+            ) {
+                resultado = 'Você venceu!';
+                placarUsuario++;
+            } else {
+                resultado = 'O computador venceu!';
+                placarComputador++;
+            }
+
+
+            document.getElementById('resultado').innerHTML =
+                `Você escolheu <b>${escolhaUsuario}</b>.<br>
+                 O computador escolheu <b>${escolhaComputador}</b>.<br>
+                 <strong>${resultado}</strong>`;
+
+
+            document.getElementById('usuario').textContent = placarUsuario;
+            document.getElementById('computador').textContent = placarComputador;
+            document.getElementById('empates').textContent = placarEmpates;
+        }
+    </script>
+</body>
+</html>
+

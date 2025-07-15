@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang = "pt-BR</html>">
+    <head>
+        <meta charset="UTF-8">
+        <title>Jogo da Forca</title>
+
+
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: 'Segoe Ui', sans-serif;
+                background-image: url('novofundoroxo.jpg');
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-position: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                min-height: 100vh;
+            }
+
+
+            header {
+                width: 100%;
+                background-color: #6b21a8;
+                padding: 20px 0;
+                text-align: center;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            }
+
+
+            header h1 {
+                margin: 0;
+                font-size: 2.5em;
+                color: #ffffff;
+                text-shadow: 1px 1px 2px #7c3aed;
+            }
+
+
+            main {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                flex: 1;
+                width: 100vw;
+                min-height: 60vh;
+            }
+
+
+            .container-central {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                background-color: rgba(255, 255, 255, 0.85);
+                border: 3px solid #7c3aed;
+                border-radius: 16px;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+                padding: 32px 24px;
+                margin-top: 60px;
+                min-width: 320px;
+                max-width: 90vw;
+            }
+
+
+            .palavra-secreta, .tentativas {
+                background: none;
+                border: none;
+                box-shadow: none;
+                padding: 0;
+                margin-bottom: 20px;
+                width: 100%;
+            }
+
+
+            .palavra-secreta h2, .tentativas h2 {
+                margin: 0;
+                font-size: 1.5em;
+                color: #4c1d95; /* roxo escuro */
+            }
+            .palavra-secreta p, .tentativas p {
+                font-size: 1.2em;
+                color: #6b21a8; /* roxo médio */
+            }
+            .tentativas p {
+                font-weight: bold;
+            }
+            .palavra-secreta p {
+                letter-spacing: 5px;
+            }
+            .tentativas p {
+                font-size: 1.5em;
+            }
+            @media (max-width: 600px) {
+                header h1 {
+                    font-size: 2em;
+                }
+                .palavra-secreta h2, .tentativas h2 {
+                    font-size: 1.2em;
+                }
+                .palavra-secreta p, .tentativas p {
+                    font-size: 1em;
+                }
+                .container-central {
+                    padding: 16px 8px;
+                    min-width: unset;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>Jogo da Forca</h1>
+        </header>
+        <main>
+            <div class="container-central">
+                <div class="palavra-secreta">
+                    <h2>Palavra Secreta</h2>
+                    <p>_ _ _ _ _ _</p>
+                </div>
+                <div class="tentativas">
+                    <h2>Tentativas</h2>
+                    <p>0</p>
+                </div>
+            </div>
+        </main>
+    </body>
+</html>
