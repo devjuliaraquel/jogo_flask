@@ -47,7 +47,7 @@ def PedraPapelTesoura():
 
 @app.route("/batalha", methods=["GET", "POST"])
 def batalha():
-    return render_template("batalha.html")
+    return render_template("batalha_naval.html")
 
 @app.route("/forca", methods=["GET", "POST"])
 def forca():

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Batalha Naval Simples</title>
+  <style>
+    body {
+      background-color: #ffeef2;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+
+
+    h1 {
+      color: #a66c8f;
+      margin-top: 20px;
+    }
+
+
+    #tabuleiro {
+      width: 320px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 20px auto;
+      border: 2px solid #a66c8f;
+    }
+
+
+    .celula {
+      width: 30px;
+      height: 30px;
+      margin: 2px;
+      background-color: #fcdde6;
+      border: 1px solid #d49ba3;
+      cursor: pointer;
+    }
+
+
+    .acertou {
+      background-color: #ff8fa3;
+    }
+
+
+    .errou {
+      background-color: #2dd0e6;
+    }
+
+
+    #mensagem {
+      margin-top: 20px;
+      font-weight: bold;
+      color: #a66c8f;
+    }
+  </style>
+</head>
+<body>
+  <h1>Batalha Naval</h1>
+  <p>Clique para tentar acertar o navio</p>
+
+
+  <div id="tabuleiro"></div>
+  <div id="mensagem"></div>
+
+
+  <script>
+    let tabuleiro = document.getElementById("tabuleiro");
+    let mensagem = document.getElementById("mensagem");
+
+
+   
+    for (let i = 0; i < 100; i++) {
+      let celula = document.createElement("div");
+      celula.className = "celula";
+      celula.dataset.index = i;
+      celula.onclick = verificar;
+      tabuleiro.appendChild(celula);
+    }
+
+
+   
+    let navio = Math.floor(Math.random() * 100);
+
+
+    function verificar() {
+      let indice = parseInt(this.dataset.index);
+      if (indice === navio) {
+        this.classList.add("acertou");
+        mensagem.textContent = "Você acertou o navio";
+      } else {
+        this.classList.add("errou");
+        mensagem.textContent = "Água, Tente de novo.";
+        this.onclick = null;
+      }
+    }
+  </script>
+</body>
+</html>
+
+
+
